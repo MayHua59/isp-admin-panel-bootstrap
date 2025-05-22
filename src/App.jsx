@@ -121,11 +121,12 @@ function App() {
   bgColor = "bg-white",
   textColor = "text-dark",
   cardStyle = {},
-  iconColor = "#007bff"
+  iconColor ,
 }) => (
   <div className="col-md-3 mb-3">
-    <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={cardStyle}>
-      <div className="card-body p-3">
+    <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={{...cardStyle,borderRadius: "0.375rem", 
+    overflow: "hidden",}}>
+      <div className="card-body p-3 pb-2 ">
         {/* First row: icon + main text */}
         <div className="d-flex align-items-center mb-2">
           {iconClass && (
@@ -201,10 +202,11 @@ const SecondRowStatCard = ({
   iconColor = "#007bff",
 }) => (
   <div className="col-md-3 mb-3">
-    <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={cardStyle}>
+    <div className={`card shadow-sm  ${bgColor} ${textColor}`} style={{ ...cardStyle, border: `1px solid ${bgColor}`,borderRadius: "0.375rem", overflow: "hidden" }}>
+      {/* First row with icon and main text */}
       <div className="card-body p-0"> {/* Remove padding */}
         {/* Blue background for first and second row, full width */}
-        <div style={{ background: bgColor, borderTopLeftRadius: "0.375rem", borderTopRightRadius: "0.375rem" }}>
+        <div style={{ background: bgColor }}>
           <div className="container-fluid px-3 py-2">
             <div className="row align-items-center mb-2">
               <div className="col-6 d-flex justify-content-between">
@@ -242,7 +244,7 @@ const SecondRowStatCard = ({
   </div>
 </div> */}
 <div className="container-fluid mt-2">
-  <div className="row align-items-center" style={{ borderRadius: "0 0 0.375rem 0.375rem" }}>
+  <div className="row align-items-center" >
     {row3col2 ? (
       <>
         <div className="col-6 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
@@ -988,7 +990,7 @@ useEffect(() => {
         
        
 <div className="row">
-  <StatCard
+  {/* <StatCard
     title="New customers"
     value={newCustomers}
     iconClass="fas fa-user-plus"
@@ -996,7 +998,7 @@ useEffect(() => {
     textColor="text-white"
     size="col-md-3"
     cardStyle={{ height: "80px" }} // Half height
-  />
+  /> */}
   {/* <StatCard
     title="New Customer"
     value={newOpenTickets}
@@ -1006,6 +1008,16 @@ useEffect(() => {
     size="col-md-3"
     cardStyle={{ height: "80px" }}
   /> */}
+  <FirstRowStatCard
+    iconClass="fas fa-user"
+    mainText="New Customers"
+    leftText="View"
+    rightText="10"
+    bgColor="bg-light"
+    textColor="text-dark"
+    cardStyle={{ height: "80px" }}
+    iconColor="#ADD8E6"
+  />
     <FirstRowStatCard
     iconClass="fas fa-user"
     mainText="New Customers"
@@ -1014,7 +1026,7 @@ useEffect(() => {
     bgColor="bg-light"
     textColor="text-dark"
     cardStyle={{ height: "80px" }}
-    iconColor="#198754"
+    iconColor="#ADD8E6"
   />
    <FirstRowStatCard
     iconClass="fa-solid fa-ticket"
@@ -1024,7 +1036,7 @@ useEffect(() => {
     bgColor="bg-light"
     textColor="text-dark"
     cardStyle={{ height: "80px" }}
-    iconColor="#198754"
+    iconColor="#ADD8E6"
   />
   <FirstRowStatCard
     iconClass="fa-solid fa-desktop"
@@ -1034,13 +1046,13 @@ useEffect(() => {
     bgColor="bg-light"
     textColor="text-dark"
     cardStyle={{ height: "80px" }}
-    iconColor="#198754"
+    iconColor="#ADD8E6"
   />
 </div>
 
         
         {/* Statistics Cards Row 2 */}  
-<div className="row mt-4">
+<div className="row mt-2">
   <SecondRowStatCard
   iconClass="fa-solid fa-wand-magic-sparkles"
   row1col2="1"
@@ -1115,11 +1127,10 @@ useEffect(() => {
   
 </div>
 
-        {/* Network Status Section */}
         
 
 
-        {/* Another Network Status Section */}
+        {/*  Network Status Section */}
  <div className="container position-relative mt-4">
   <div className="row">
     {/* Network Status Card */}
