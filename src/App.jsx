@@ -99,20 +99,63 @@ function App() {
   }, []); // Empty dependency array means this runs once on mount
 
   // Card component for statistics
-  const StatCard = ({ title, value, iconClass, bgColor, textColor, details, size = 'col-md-3' }) => (
-    <div className={`${size} mb-3`}>
-      <div className={`card shadow-sm h-100 ${bgColor} ${textColor}`}>
-        <div className="card-body d-flex flex-column justify-content-between">
-          <div className="d-flex align-items-center mb-2">
-            {iconClass && <i className={`${iconClass} fa-2x me-3`}></i>}
-            <h5 className="card-title mb-0 flex-grow-1">{title}</h5>
-            {details && <small className="text-opacity-75">{details}</small>}
-          </div>
-          <p className="card-text display-4 fw-bold text-center">{value}</p>
+  // const StatCard = ({ title, value, iconClass, bgColor, textColor, details, size = 'col-md-3' }) => (
+  //   <div className={`${size} mb-3`}>
+  //     <div className={`card shadow-sm h-100 ${bgColor} ${textColor}`}>
+  //       <div className="card-body d-flex flex-column justify-content-between">
+  //         <div className="d-flex align-items-center mb-2">
+  //           {iconClass && <i className={`${iconClass} fa-2x me-3`}></i>}
+  //           <h5 className="card-title mb-0 flex-grow-1">{title}</h5>
+  //           {details && <small className="text-opacity-75">{details}</small>}
+  //         </div>
+  //         <p className="card-text display-4 fw-bold text-center">{value}</p>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+  const FirstRowStatCard = ({
+  iconClass,
+  mainText,
+  leftText,
+  rightText,
+  bgColor = "bg-white",
+  textColor = "text-dark",
+  cardStyle = {},
+  iconColor = "#007bff"
+}) => (
+  <div className="col-md-3 mb-3">
+    <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={cardStyle}>
+      <div className="card-body p-3">
+        {/* First row: icon + main text */}
+        <div className="d-flex align-items-center mb-2">
+          {iconClass && (
+            <i className={`${iconClass} me-2`} style={{ fontSize: "1rem", color: iconColor }}></i>
+          )}
+          <span className="fw-bold">{mainText}</span>
+        </div>
+        {/* Second row: left and right text */}
+        <div className="d-flex justify-content-between">
+          <span>{leftText}</span>
+          <span>{rightText}</span>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+  const StatCard = ({ title, value, iconClass, bgColor, textColor, details, size = 'col-md-3', cardStyle }) => (
+  <div className={`${size} mb-3`}>
+    <div className={`card shadow-sm rounded-1 ${bgColor} ${textColor}`} style={cardStyle}>
+      <div className="card-body d-flex flex-column justify-content-between">
+        <div className="d-flex align-items-center mb-2">
+          {iconClass && <i className={`${iconClass} fa-2x me-3`}></i>}
+          <h5 className="card-title mb-0 flex-grow-1">{title}</h5>
+          {details && <small className="text-opacity-75">{details}</small>}
+        </div>
+        <p className="card-text display-4 fw-bold text-center">{value}</p>
+      </div>
+    </div>
+  </div>
+);
 
   //Logic
   const [customersOpen, setCustomersOpen] = useState(false);
@@ -773,6 +816,7 @@ useEffect(() => {
           <div className="container-fluid">
             <a className="navbar-brand d-md-none" href="#">Dashboard</a> {/* Show brand on small screens */}
             <div className="d-flex align-items-center ms-auto">
+              <button className="btn btn-primary btn-sm me-3">Deployment guide</button>
               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-plus"></i></a>
               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-search"></i></a>
               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-bell"></i></a>
@@ -820,89 +864,114 @@ useEffect(() => {
 
         {/* Dashboard Header */}
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h2 className="mb-0">Dashboard</h2>
-          {/* Placeholder for "Deployment guide" button */}
-          <button className="btn btn-outline-primary btn-sm">Deployment guide</button>
+          <h2 className="mb-0"> <i className="fa-solid fa-table-columns me-2" style={{ color: "#000" }}></i>Dashboard</h2>
+          
+          
         </div>
 
         {/* Statistics Cards Row 1 */}
-        <div className="row">
-          <StatCard
-            title="New customers"
-            value={newCustomers}
-            iconClass="fas fa-user-plus"
-            bgColor="bg-success"
-            textColor="text-white"
-            size="col-md-4"
-          />
-          <StatCard
-            title="New & open tickets"
-            value={newOpenTickets}
-            iconClass="fas fa-ticket-alt"
-            bgColor="bg-primary"
-            textColor="text-white"
-            size="col-md-4"
-          />
-          <StatCard
-            title="Devices down"
-            value={devicesDown}
-            iconClass="fas fa-exclamation-triangle"
-            bgColor="bg-danger"
-            textColor="text-white"
-            size="col-md-4"
-          />
-        </div>
+        
+       
+<div className="row">
+  <StatCard
+    title="New customers"
+    value={newCustomers}
+    iconClass="fas fa-user-plus"
+    bgColor="bg-success"
+    textColor="text-white"
+    size="col-md-3"
+    cardStyle={{ height: "80px" }} // Half height
+  />
+  {/* <StatCard
+    title="New Customer"
+    value={newOpenTickets}
+    iconClass="fas fa-ticket-alt"
+    bgColor="bg-primary"
+    textColor="text-white"
+    size="col-md-3"
+    cardStyle={{ height: "80px" }}
+  /> */}
+    <FirstRowStatCard
+    iconClass="fas fa-user"
+    mainText="New Customers"
+    leftText="View"
+    rightText="10"
+    bgColor="bg-light"
+    textColor="text-dark"
+    cardStyle={{ height: "80px" }}
+    iconColor="#198754"
+  />
+   <FirstRowStatCard
+    iconClass="fa-solid fa-ticket"
+    mainText="New & open tickets"
+    leftText="View"
+    rightText="1"
+    bgColor="bg-light"
+    textColor="text-dark"
+    cardStyle={{ height: "80px" }}
+    iconColor="#198754"
+  />
+  <FirstRowStatCard
+    iconClass="fa-solid fa-desktop"
+    mainText="Devices down"
+    leftText="View"
+    rightText="2"
+    bgColor="bg-light"
+    textColor="text-dark"
+    cardStyle={{ height: "80px" }}
+    iconColor="#198754"
+  />
+</div>
 
-        {/* Statistics Cards Row 2 */}
-        <div className="row mt-3">
-          <StatCard
-            title="Waiting authorization"
-            value={waitingAuthorization}
-            iconClass="fas fa-hourglass-half"
-            bgColor="bg-info"
-            textColor="text-white"
-            size="col-md-4"
-          />
-          <StatCard
-            title="EAP-TLS USER"
-            value={`${eapTlsUsers} user`}
-            iconClass="fas fa-wifi"
-            bgColor="bg-danger"
-            textColor="text-white"
-            size="col-md-4"
-          />
-          <StatCard
-            title="Total offline"
-            value={totalOffline}
-            iconClass="fas fa-times-circle"
-            bgColor="bg-dark"
-            textColor="text-white"
-            size="col-md-4"
-          />
-        </div>
-
-        {/* Statistics Cards Row 3 (Low Signals) */}
-        <div className="row mt-3">
-          <StatCard
-            title="Low signals"
-            value={lowSignals}
-            iconClass="fas fa-signal"
-            bgColor="bg-warning"
-            textColor="text-dark"
-            size="col-md-4"
-            details={
-              <div className="d-flex flex-column align-items-end text-dark">
-                <small>Warning: -</small>
-                <small>Critical: -</small>
-              </div>
-            }
-          />
-          {/* Placeholder for "TR-GEM LACEI" and "Information valid at 20:18" */}
-          <div className="col-md-8 d-flex flex-column justify-content-end align-items-end">
-            <p className="text-muted mb-0">TR-GEM LACEI</p>
-            <p className="text-muted mb-0">Information valid at 20:18</p>
-          </div>
-        </div>
+        
+        {/* Statistics Cards Row 2 */}  
+<div className="row mt-3">
+  <StatCard
+    title="EAP-TLS USER"
+    value={`${eapTlsUsers} user`}
+    iconClass="fas fa-wifi"
+    bgColor="bg-danger"
+    textColor="text-white"
+    size="col-md-3"
+    cardStyle={{ height: "160px" }} // Full height
+  />
+  <StatCard
+    title="Total offline"
+    value={totalOffline}
+    iconClass="fas fa-times-circle"
+    bgColor="bg-dark"
+    textColor="text-white"
+    size="col-md-3"
+    cardStyle={{ height: "160px" }}
+  />
+  <StatCard
+    title="Low signals"
+    value={lowSignals}
+    iconClass="fas fa-signal"
+    bgColor="bg-warning"
+    textColor="text-dark"
+    size="col-md-3"
+    cardStyle={{ height: "160px" }}
+    details={
+      <div className="d-flex flex-column align-items-end text-dark">
+        <small>Warning: -</small>
+        <small>Critical: -</small>
+      </div>
+    }
+  />
+  <StatCard
+    title=""
+    value=""
+    size="col-md-3"
+    cardStyle={{ height: "160px", background: "primary", boxShadow: "none", border: "none" }}
+    details={
+      <div className="d-flex flex-column justify-content-end align-items-end h-100">
+        <p className="text-muted mb-0">TR-GEM LACEI</p>
+        <p className="text-muted mb-0">Information valid at 20:18</p>
+      </div>
+    }
+  />
+</div>
 
         {/* Network Status Section */}
         <div className="card shadow-sm mt-4">
