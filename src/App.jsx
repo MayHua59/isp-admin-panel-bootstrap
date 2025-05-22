@@ -1,16 +1,478 @@
-import { useState } from 'react'
-import React from 'react';
-import './App.css'
+// import { useState } from 'react'
+// import React from 'react';
+// import './App.css'
+
+// function App() {
+//   const [count, setCount] = useState(0)
+
+//   return (
+//     <div className="container">
+//         <h1>Hello, Bootstrap with Vite!</h1>
+//         <button className="btn btn-primary">Click Me</button>
+//       </div>
+//   )
+// }
+
+// export default App
+
+import React from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import Dashboard from './pages/dashboard'
+
+function Home() {
+  return <h2>Home Page</h2>
+}
+
+function About() {
+  return <h2>About Page</h2>
+}
+
+function NotFound() {
+  return <h2>Page Not Found</h2>
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="container">
-        <h1>Hello, Bootstrap with Vite!</h1>
-        <button className="btn btn-primary">Click Me</button>
-      </div>
+    <div className="container mt-4">
+      <nav>
+        <Link to="/" className="btn btn-primary me-2">Home</Link>
+        <Link to="/about" className="btn btn-secondary">About</Link>
+      </nav>
+
+      <hr />
+
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   )
 }
 
 export default App
+
+
+// import React, { useState, useEffect } from 'react';
+
+// // Main App component
+// function App() {
+//   // State for dynamic content, if needed later
+//   const [newCustomers, setNewCustomers] = useState(1);
+//   const [newOpenTickets, setNewOpenTickets] = useState(10);
+//   const [devicesDown, setDevicesDown] = useState(2);
+//   const [waitingAuthorization, setWaitingAuthorization] = useState(1);
+//   const [eapTlsUsers, setEapTlsUsers] = useState(10000);
+//   const [totalOffline, setTotalOffline] = useState(2);
+//   const [lowSignals, setLowSignals] = useState(0);
+
+//   useEffect(() => {
+//     // Dynamically load Font Awesome for icons
+//     const fontAwesomeLink = document.createElement('link');
+//     fontAwesomeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+//     fontAwesomeLink.rel = 'stylesheet';
+//     document.head.appendChild(fontAwesomeLink);
+
+//     // Dynamically load Bootstrap CSS
+//     const bootstrapCssLink = document.createElement('link');
+//     bootstrapCssLink.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css';
+//     bootstrapCssLink.rel = 'stylesheet';
+//     bootstrapCssLink.integrity = 'sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH';
+//     bootstrapCssLink.crossOrigin = 'anonymous';
+//     document.head.appendChild(bootstrapCssLink);
+
+//     // Dynamically load Bootstrap JS bundle (Popper.js included)
+//     const bootstrapJsScript = document.createElement('script');
+//     bootstrapJsScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
+//     bootstrapJsScript.integrity = 'sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz';
+//     bootstrapJsScript.crossOrigin = 'anonymous';
+//     document.body.appendChild(bootstrapJsScript);
+
+//     // Clean up on component unmount
+//     return () => {
+//       document.head.removeChild(fontAwesomeLink);
+//       document.head.removeChild(bootstrapCssLink);
+//       document.body.removeChild(bootstrapJsScript);
+//     };
+//   }, []); // Empty dependency array means this runs once on mount
+
+//   // Card component for statistics
+//   const StatCard = ({ title, value, iconClass, bgColor, textColor, details, size = 'col-md-3' }) => (
+//     <div className={`${size} mb-3`}>
+//       <div className={`card shadow-sm h-100 ${bgColor} ${textColor}`}>
+//         <div className="card-body d-flex flex-column justify-content-between">
+//           <div className="d-flex align-items-center mb-2">
+//             {iconClass && <i className={`${iconClass} fa-2x me-3`}></i>}
+//             <h5 className="card-title mb-0 flex-grow-1">{title}</h5>
+//             {details && <small className="text-opacity-75">{details}</small>}
+//           </div>
+//           <p className="card-text display-4 fw-bold text-center">{value}</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+
+//   return (
+//     <div className="d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+//       {/* Sidebar */}
+//       <nav className="d-none d-md-block bg-white shadow-sm sidebar" style={{ width: '250px', flexShrink: 0 }}>
+//         <div className="position-sticky pt-3">
+//           <div className="d-flex align-items-center px-3 mb-4">
+//             <span className="fs-5 fw-bold text-primary">Dashboard</span>
+//           </div>
+//           <ul className="nav flex-column">
+//             <li className="nav-item">
+//               <a className="nav-link active text-primary" aria-current="page" href="#">
+//                 <i className="fas fa-tachometer-alt me-2"></i>
+//                 Dashboard
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <span className="nav-link text-muted text-uppercase fw-bold small mt-3">CRM</span>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-users me-2"></i>
+//                 Customers
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-chart-line me-2"></i>
+//                 Leads
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-ticket-alt me-2"></i>
+//                 Tickets
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <span className="nav-link text-muted text-uppercase fw-bold small mt-3">Company</span>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-dollar-sign me-2"></i>
+//                 Finance
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-envelope me-2"></i>
+//                 Messages
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <span className="nav-link text-muted text-uppercase fw-bold small mt-3">Networking</span>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-network-wired me-2"></i>
+//                 Network sites
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-server me-2"></i>
+//                 Routers
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-cogs me-2"></i>
+//                 TR-GEM (ACS)
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-hdd me-2"></i>
+//                 Hardware
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-globe me-2"></i>
+//                 IPv4 networks
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-globe-americas me-2"></i>
+//                 IPv6 networks
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-map me-2"></i>
+//                 Maps
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-calendar-alt me-2"></i>
+//                 Scheduling
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-boxes me-2"></i>
+//                 Inventory
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-phone-alt me-2"></i>
+//                 Voice
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-file-invoice-dollar me-2"></i>
+//                 Tariff plans
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <span className="nav-link text-muted text-uppercase fw-bold small mt-3">System</span>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-user-shield me-2"></i>
+//                 Administration
+//               </a>
+//             </li>
+//             <li className="nav-item">
+//               <a className="nav-link text-dark" href="#">
+//                 <i className="fas fa-cog me-2"></i>
+//                 Config
+//               </a>
+//             </li>
+//           </ul>
+//         </div>
+//       </nav>
+
+//       {/* Main Content */}
+//       <div className="flex-grow-1 p-4">
+//         {/* Top Navbar (simplified for this example) */}
+//         <nav className="navbar navbar-expand-lg navbar-light bg-white rounded shadow-sm mb-4">
+//           <div className="container-fluid">
+//             <a className="navbar-brand d-md-none" href="#">Dashboard</a> {/* Show brand on small screens */}
+//             <div className="d-flex align-items-center ms-auto">
+//               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-plus"></i></a>
+//               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-search"></i></a>
+//               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-bell"></i></a>
+//               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-question-circle"></i></a>
+//               <div className="dropdown">
+//                 <a className="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+//                   <i className="fas fa-user-circle me-1"></i> Main Admin
+//                 </a>
+//                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+//                   <li><a className="dropdown-item" href="#">Profile</a></li>
+//                   <li><a className="dropdown-item" href="#">Settings</a></li>
+//                   <li><hr className="dropdown-divider" /></li>
+//                   <li><a className="dropdown-item" href="#">Logout</a></li>
+//                 </ul>
+//               </div>
+//             </div>
+//           </div>
+//         </nav>
+
+//         {/* Dashboard Header */}
+//         <div className="d-flex justify-content-between align-items-center mb-4">
+//           <h2 className="mb-0">Dashboard</h2>
+//           {/* Placeholder for "Deployment guide" button */}
+//           <button className="btn btn-outline-primary btn-sm">Deployment guide</button>
+//         </div>
+
+//         {/* Statistics Cards Row 1 */}
+//         <div className="row">
+//           <StatCard
+//             title="New customers"
+//             value={newCustomers}
+//             iconClass="fas fa-user-plus"
+//             bgColor="bg-success"
+//             textColor="text-white"
+//             size="col-md-4"
+//           />
+//           <StatCard
+//             title="New & open tickets"
+//             value={newOpenTickets}
+//             iconClass="fas fa-ticket-alt"
+//             bgColor="bg-primary"
+//             textColor="text-white"
+//             size="col-md-4"
+//           />
+//           <StatCard
+//             title="Devices down"
+//             value={devicesDown}
+//             iconClass="fas fa-exclamation-triangle"
+//             bgColor="bg-danger"
+//             textColor="text-white"
+//             size="col-md-4"
+//           />
+//         </div>
+
+//         {/* Statistics Cards Row 2 */}
+//         <div className="row mt-3">
+//           <StatCard
+//             title="Waiting authorization"
+//             value={waitingAuthorization}
+//             iconClass="fas fa-hourglass-half"
+//             bgColor="bg-info"
+//             textColor="text-white"
+//             size="col-md-4"
+//           />
+//           <StatCard
+//             title="EAP-TLS USER"
+//             value={`${eapTlsUsers} user`}
+//             iconClass="fas fa-wifi"
+//             bgColor="bg-danger"
+//             textColor="text-white"
+//             size="col-md-4"
+//           />
+//           <StatCard
+//             title="Total offline"
+//             value={totalOffline}
+//             iconClass="fas fa-times-circle"
+//             bgColor="bg-dark"
+//             textColor="text-white"
+//             size="col-md-4"
+//           />
+//         </div>
+
+//         {/* Statistics Cards Row 3 (Low Signals) */}
+//         <div className="row mt-3">
+//           <StatCard
+//             title="Low signals"
+//             value={lowSignals}
+//             iconClass="fas fa-signal"
+//             bgColor="bg-warning"
+//             textColor="text-dark"
+//             size="col-md-4"
+//             details={
+//               <div className="d-flex flex-column align-items-end text-dark">
+//                 <small>Warning: -</small>
+//                 <small>Critical: -</small>
+//               </div>
+//             }
+//           />
+//           {/* Placeholder for "TR-GEM LACEI" and "Information valid at 20:18" */}
+//           <div className="col-md-8 d-flex flex-column justify-content-end align-items-end">
+//             <p className="text-muted mb-0">TR-GEM LACEI</p>
+//             <p className="text-muted mb-0">Information valid at 20:18</p>
+//           </div>
+//         </div>
+
+//         {/* Network Status Section */}
+//         <div className="card shadow-sm mt-4">
+//           <div className="card-header bg-white d-flex justify-content-between align-items-center">
+//             <h5 className="mb-0"><i className="fas fa-chart-area me-2"></i> Network status</h5>
+//             <div>
+//               <button className="btn btn-outline-secondary btn-sm me-2">More graphs</button>
+//               <div className="btn-group">
+//                 <button type="button" className="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+//                   OLTS
+//                 </button>
+//                 <ul className="dropdown-menu">
+//                   <li><a className="dropdown-item" href="#">Action</a></li>
+//                   <li><a className="dropdown-item" href="#">Another action</a></li>
+//                 </ul>
+//               </div>
+//               <div className="btn-group ms-2">
+//                 <button type="button" className="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+//                   All-
+//                 </button>
+//                 <ul className="dropdown-menu">
+//                   <li><a className="dropdown-item" href="#">Action</a></li>
+//                   <li><a className="dropdown-item" href="#">Another action</a></li>
+//                 </ul>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="card-body">
+//             <h6 className="card-subtitle mb-3 text-muted">Daily network status</h6>
+//             {/* Graph Placeholder */}
+//             <div className="bg-light border rounded p-4 mb-3" style={{ height: '250px', position: 'relative' }}>
+//               {/* This is a simplified representation of the graph. A real implementation would use a charting library. */}
+//               <div style={{ position: 'absolute', top: '10px', left: '10px', fontSize: '0.8em', color: '#666' }}>
+//                 <p className="mb-0">ONUs</p>
+//                 <p className="mb-0">2.0</p>
+//                 <p className="mb-0">1.5</p>
+//                 <p className="mb-0">1.0</p>
+//                 <p className="mb-0">0.5</p>
+//                 <p className="mb-0">0.0</p>
+//               </div>
+//               <div style={{ position: 'absolute', bottom: '10px', left: '50px', right: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '0.8em', color: '#666' }}>
+//                 <span>Fr 00:00</span>
+//                 <span>Fr 04:00</span>
+//                 <span>Fr 08:00</span>
+//                 <span>Fr 12:00</span>
+//                 <span>Fr 16:00</span>
+//                 <span>Fr 20:00</span>
+//               </div>
+//               {/* Simple bar to represent the graph data */}
+//               <div style={{
+//                 position: 'absolute',
+//                 bottom: '50px',
+//                 left: '60px',
+//                 width: 'calc(100% - 120px)',
+//                 height: '150px',
+//                 backgroundColor: 'rgba(0, 123, 255, 0.2)',
+//                 borderLeft: '1px solid #ccc',
+//                 borderBottom: '1px solid #ccc'
+//               }}>
+//                 <div style={{
+//                   position: 'absolute',
+//                   bottom: '0',
+//                   left: '0',
+//                   width: '30%',
+//                   height: '80%',
+//                   backgroundColor: 'rgba(0, 123, 255, 0.6)'
+//                 }}></div>
+//                  <div style={{
+//                   position: 'absolute',
+//                   bottom: '0',
+//                   left: '30%',
+//                   width: '70%',
+//                   height: '40%',
+//                   backgroundColor: 'rgba(0, 123, 255, 0.4)'
+//                 }}></div>
+//               </div>
+//             </div>
+
+//             <div className="row mt-3">
+//               <div className="col-md-6">
+//                 <ul className="list-group list-group-flush">
+//                   <li className="list-group-item d-flex justify-content-between align-items-center">
+//                     <i className="fas fa-chart-pie me-2"></i> smartolt
+//                     <span className="badge bg-secondary">2 Days, 08:35 +PE</span>
+//                   </li>
+//                   <li className="list-group-item d-flex justify-content-between align-items-center">
+//                     <i className="fas fa-chart-pie me-2"></i> OLTONE
+//                     <span className="badge bg-secondary">N/A</span>
+//                   </li>
+//                 </ul>
+//               </div>
+//               <div className="col-md-6">
+//                 <h6 className="mt-3 mt-md-0">Online ONUs</h6>
+//                 <div className="row">
+//                   <div className="col-6">
+//                     <p className="mb-1"><i className="fas fa-bolt me-2 text-warning"></i> Power fail: 0</p>
+//                     <p className="mb-1"><i className="fas fa-exclamation-circle me-2 text-danger"></i> Maximum: 2</p>
+//                   </div>
+//                   <div className="col-6">
+//                     <p className="mb-1"><i className="fas fa-signal me-2 text-info"></i> Signal loss: 1</p>
+//                     <p className="mb-1"><i className="fas fa-times-circle me-2 text-muted"></i> N/A: 1</p>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
+
