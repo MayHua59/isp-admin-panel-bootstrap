@@ -117,6 +117,10 @@ function App() {
   //Logic
   const [customersOpen, setCustomersOpen] = useState(false);
   const [ticketsOpen, setTicketsOpen] = useState(false);
+  const [messagesOpen, setMessagesOpen] = useState(false);
+  const [networkingOpen, setNetworkingOpen] = useState(false);
+  const [oltOpen, setOltOpen] = useState(false);
+  const [splitterOpen, setSplitterOpen] = useState(false);
 
   return (
     <div className="d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
@@ -233,7 +237,7 @@ function App() {
     </ul>
   )}
 </li>
-           <li className="nav-item">
+           {/* <li className="nav-item">
   <a className="nav-link text-dark d-flex justify-content-between align-items-center" href="#">
     <span>
       <i className="fas fa-envelope me-2"></i>
@@ -241,25 +245,179 @@ function App() {
     </span>
     <i className="fa-solid fa-less-than fa-rotate-270 me-2 text-secondary fa-sm"></i>
   </a>
+</li> */}
+<li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setMessagesOpen(open => !open);
+    }}
+    aria-expanded={messagesOpen}
+  >
+    <span>
+      <i className="fas fa-envelope me-2"></i>
+      Messages
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: messagesOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {messagesOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">All Messages</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Unread</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Sent</a>
+      </li>
+    </ul>
+  )}
 </li>
             <li className="nav-item">
               <span className="nav-link text-muted text-uppercase fw-bold small mt-3">Company</span>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
-                <i className="fas fa-dollar-sign me-2"></i>
-                Finance
+                <i className="fas fa-globe me-2"></i>
+                Networking
               </a>
-            </li>
+            </li> */}
+            
             <li className="nav-item">
-              <a className="nav-link text-dark" href="#">
-                <i className="fas fa-envelope me-2"></i>
-                Messages
-              </a>
-            </li>
-            <li className="nav-item">
-              <span className="nav-link text-muted text-uppercase fw-bold small mt-3">Networking</span>
-            </li>
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setNetworkingOpen(open => !open);
+    }}
+    aria-expanded={networkingOpen}
+  >
+    <span>
+      <i className="fas fa-globe me-2"></i>
+      Networking
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: networkingOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {networkingOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setOltOpen(open => !open);
+    }}
+    aria-expanded={oltOpen}
+  >
+    <span>
+      <i className="fas fa-microchip me-2"></i>
+      OLT
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: oltOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {oltOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">OLT List</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">New OLT</a>
+      </li>
+      
+    </ul>
+  )}
+</li>
+{/* Start Splitter */}
+<li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setSplitterOpen(open => !open);
+    }}
+    aria-expanded={splitterOpen}
+  >
+    <span>
+      <i className="fas fa-code-branch me-2"></i>
+      Splitter
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: splitterOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {splitterOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Splitter List</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">New Splitter</a>
+      </li>
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Splitter Config</a>
+      </li> */}
+    </ul>
+  )}
+</li>
+{/* End Splitter */}
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Splitter</a>
+      </li> */}
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">ONU</a>
+      </li> */}
+      {/* Start ONU */}
+      
+      {/* End ONU */}
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Plan</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Billing</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">PPPoE Account</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">PPPoE Server</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Card</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Card Plan</a>
+      </li>
+    </ul>
+  )}
+</li>
             <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-network-wired me-2"></i>
