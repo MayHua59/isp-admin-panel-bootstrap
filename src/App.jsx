@@ -116,6 +116,7 @@ function App() {
 
   //Logic
   const [customersOpen, setCustomersOpen] = useState(false);
+  const [ticketsOpen, setTicketsOpen] = useState(false);
 
   return (
     <div className="d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
@@ -187,7 +188,7 @@ function App() {
                 Leads
               </a>
             </li> */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link text-dark d-flex justify-content-between align-items-center" href="#">
                 <span>
                   <i className="fas fa-ticket-alt me-2"></i>
@@ -195,7 +196,43 @@ function App() {
                 </span>
                 <i className="fa-solid fa-less-than fa-rotate-270 me-2 text-secondary fa-sm" ></i>
               </a>
-            </li>
+            </li> */}
+            <li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setTicketsOpen(open => !open);
+    }}
+    aria-expanded={ticketsOpen}
+  >
+    <span>
+      <i className="fas fa-ticket-alt me-2"></i>
+      Tickets
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: ticketsOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {ticketsOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">All Tickets</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Open Tickets</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Closed Tickets</a>
+      </li>
+    </ul>
+  )}
+</li>
            <li className="nav-item">
   <a className="nav-link text-dark d-flex justify-content-between align-items-center" href="#">
     <span>
