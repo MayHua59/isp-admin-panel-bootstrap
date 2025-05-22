@@ -55,7 +55,7 @@
 // export default App
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef} from 'react';
 
 // Main App component
 function App() {
@@ -121,11 +121,31 @@ function App() {
   const [networkingOpen, setNetworkingOpen] = useState(false);
   const [oltOpen, setOltOpen] = useState(false);
   const [splitterOpen, setSplitterOpen] = useState(false);
+  const [onuOpen, setOnuOpen] = useState(false);
+  const [planOpen, setPlanOpen] = useState(false);
+const [homePlanOpen, setHomePlanOpen] = useState(false);
+const [cardPlanOpen, setCardPlanOpen] = useState(false);
+const [billingOpen, setBillingOpen] = useState(false);
+const [pppoeOpen, setPppoeOpen] = useState(false);
+const [pppoeServerOpen, setPppoeServerOpen] = useState(false);
+const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
+const adminDropdownRef = useRef(null);
+
+useEffect(() => {
+  function handleClickOutside(event) {
+    if (adminDropdownRef.current && !adminDropdownRef.current.contains(event.target)) {
+      setAdminDropdownOpen(false);
+    }
+  }
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
 
   return (
     <div className="d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
       {/* Sidebar */}
-      <nav className="d-none d-md-block bg-white shadow-sm sidebar" style={{ width: '250px', flexShrink: 0 }}>
+      <nav className="d-none d-md-block bg-white shadow-sm sidebar" style={{ width: '250px', flexShrink: 0, marginTop: '30px' }}>
         <div className="position-sticky pt-3">
           {/* <div className="d-flex align-items-center px-3 mb-4">
             <span className="fs-5 fw-bold text-primary">Dashboard</span>
@@ -344,7 +364,7 @@ function App() {
         <a className="nav-link text-dark" href="#">OLT List</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-dark" href="#">New OLT</a>
+        <a className="nav-link text-dark" href="#">Add OLT</a>
       </li>
       
     </ul>
@@ -379,7 +399,7 @@ function App() {
         <a className="nav-link text-dark" href="#">Splitter List</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-dark" href="#">New Splitter</a>
+        <a className="nav-link text-dark" href="#">Add Splitter</a>
       </li>
       {/* <li className="nav-item">
         <a className="nav-link text-dark" href="#">Splitter Config</a>
@@ -395,78 +415,312 @@ function App() {
         <a className="nav-link text-dark" href="#">ONU</a>
       </li> */}
       {/* Start ONU */}
-      
-      {/* End ONU */}
       <li className="nav-item">
-        <a className="nav-link text-dark" href="#">Plan</a>
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setOnuOpen(open => !open);
+    }}
+    aria-expanded={onuOpen}
+  >
+    <span>
+      <i className="fas fa-sitemap me-2"></i>
+      ONU
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: onuOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {onuOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">ONU List</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-dark" href="#">Billing</a>
+        <a className="nav-link text-dark" href="#">Add ONU</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-dark" href="#">PPPoE Account</a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link text-dark" href="#">PPPoE Server</a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link text-dark" href="#">Card</a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link text-dark" href="#">Card Plan</a>
+        <a className="nav-link text-dark" href="#">ONU Config</a>
       </li>
     </ul>
   )}
 </li>
+      {/* End ONU */}
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Plan</a>
+      </li> */}
+      {/* Start Plan */}
+      
+<li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setPlanOpen(open => !open);
+    }}
+    aria-expanded={planOpen}
+  >
+    <span>
+      <i className="fas fa-layer-group me-2"></i>
+      Tariff Plan
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: planOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {planOpen && (
+    <ul className="nav flex-column ms-4">
+      {/* Home Plan */}
+      <li className="nav-item">
+        <a
+          className="nav-link text-dark d-flex justify-content-between align-items-center"
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            setHomePlanOpen(open => !open);
+          }}
+          aria-expanded={homePlanOpen}
+        >
+          <span>
+            <i className="fas fa-home me-2"></i>
+            Home Plan
+          </span>
+          <i
+            className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+            style={{
+              transform: homePlanOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+              transition: 'transform 0.2s'
+            }}
+          ></i>
+        </a>
+        {homePlanOpen && (
+          <ul className="nav flex-column ms-4">
             <li className="nav-item">
+              <a className="nav-link text-dark" href="#">Plan List</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-dark" href="#">Add Plan</a>
+            </li>
+          </ul>
+        )}
+      </li>
+      {/* Card Plan */}
+      <li className="nav-item">
+        <a
+          className="nav-link text-dark d-flex justify-content-between align-items-center"
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            setCardPlanOpen(open => !open);
+          }}
+          aria-expanded={cardPlanOpen}
+        >
+          <span>
+            <i className="fas fa-id-card me-2"></i>
+            Card Plan
+          </span>
+          <i
+            className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+            style={{
+              transform: cardPlanOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+              transition: 'transform 0.2s'
+            }}
+          ></i>
+        </a>
+        {cardPlanOpen && (
+          <ul className="nav flex-column ms-4">
+            <li className="nav-item">
+              <a className="nav-link text-dark" href="#">Plan List</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-dark" href="#">New Plan</a>
+            </li>
+          </ul>
+        )}
+      </li>
+    </ul>
+  )}
+</li>
+
+      {/* End Plan */}
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Billing</a>
+      </li> */}
+      {/* Start Billing */}
+      <li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setBillingOpen(open => !open);
+    }}
+    aria-expanded={billingOpen}
+  >
+    <span>
+      <i className="fas fa-file-invoice-dollar me-2"></i>
+      Billing
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: billingOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {billingOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Billing List</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Add Billing</a>
+      </li>
+    </ul>
+  )}
+</li>
+      {/* End Billing */}
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">PPPoE Account</a>
+      </li> */}
+      {/* Start PPPoE Account */}
+      <li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setPppoeOpen(open => !open);
+    }}
+    aria-expanded={pppoeOpen}
+  >
+    <span>
+      <i className="fas fa-user-lock me-2"></i>
+      PPPoE Account
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: pppoeOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {pppoeOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Account List</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Add Account</a>
+      </li>
+    </ul>
+  )}
+</li>
+      {/* End PPPoE Account */}
+      {/* <li className="nav-item">
+        <a className="nav-link text-dark" href="#">PPPoE Server</a>
+      </li> */}
+      {/* Start PPPoE Server */}
+      <li className="nav-item">
+  <a
+    className="nav-link text-dark d-flex justify-content-between align-items-center"
+    href="#"
+    onClick={e => {
+      e.preventDefault();
+      setPppoeServerOpen(open => !open);
+    }}
+    aria-expanded={pppoeServerOpen}
+  >
+    <span>
+      <i className="fas fa-server me-2"></i>
+      PPPoE Server
+    </span>
+    <i
+      className={`fa-solid fa-less-than me-2 text-secondary fa-sm transition-arrow`}
+      style={{
+        transform: pppoeServerOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+        transition: 'transform 0.2s'
+      }}
+    ></i>
+  </a>
+  {pppoeServerOpen && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Server List</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-dark" href="#">Add Server</a>
+      </li>
+    </ul>
+  )}
+</li>
+      {/* End PPPoE Server */}
+      
+    </ul>
+  )}
+</li>
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-network-wired me-2"></i>
                 Network sites
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-server me-2"></i>
                 Routers
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-cogs me-2"></i>
                 TR-GEM (ACS)
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-hdd me-2"></i>
                 Hardware
-              </a>
-            </li>
+              </a> */}
+            {/* </li>
             <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-globe me-2"></i>
                 IPv4 networks
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-globe-americas me-2"></i>
                 IPv6 networks
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-map me-2"></i>
                 Maps
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-calendar-alt me-2"></i>
                 Scheduling
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-boxes me-2"></i>
                 Inventory
@@ -477,13 +731,13 @@ function App() {
                 <i className="fas fa-phone-alt me-2"></i>
                 Voice
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a className="nav-link text-dark" href="#">
                 <i className="fas fa-file-invoice-dollar me-2"></i>
                 Tariff plans
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <span className="nav-link text-muted text-uppercase fw-bold small mt-3">System</span>
             </li>
@@ -504,9 +758,18 @@ function App() {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-grow-1 p-4">
-        {/* Top Navbar (simplified for this example) */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-white rounded shadow-sm mb-4">
+      <div className="flex-grow-1 p-4" style={{ marginTop: "70px" }}>
+        {/* Top Navbar */}
+        <nav className="navbar navbar-expand-lg navbar-light bg-white  shadow-sm mb-4" style={{
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    padding: "0.5rem 1rem",
+    zIndex: 1050,
+    borderRadius: 0,
+    boxShadow: "0 0.125rem 0.25rem rgba(0,0,0,.075)"
+  }}>
           <div className="container-fluid">
             <a className="navbar-brand d-md-none" href="#">Dashboard</a> {/* Show brand on small screens */}
             <div className="d-flex align-items-center ms-auto">
@@ -514,7 +777,7 @@ function App() {
               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-search"></i></a>
               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-bell"></i></a>
               <a href="#" className="nav-link text-dark me-3"><i className="fas fa-question-circle"></i></a>
-              <div className="dropdown">
+              {/* <div className="dropdown">
                 <a className="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="fas fa-user-circle me-1"></i> Main Admin
                 </a>
@@ -524,7 +787,33 @@ function App() {
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="#">Logout</a></li>
                 </ul>
-              </div>
+              </div> */}
+              {/* Admin Dropdown start */}
+              <div className="dropdown" ref={adminDropdownRef}>
+  <a
+    className="nav-link dropdown-toggle text-dark"
+    href="#"
+    id="navbarDropdown"
+    role="button"
+    onClick={e => {
+      e.preventDefault();
+      setAdminDropdownOpen(open => !open);
+    }}
+    aria-expanded={adminDropdownOpen}
+  >
+    <i className="fas fa-user-circle me-1"></i> Main Admin
+  </a>
+  <ul
+    className={`dropdown-menu dropdown-menu-end${adminDropdownOpen ? " show" : ""}`}
+    aria-labelledby="navbarDropdown"
+  >
+    <li><a className="dropdown-item" href="#">Profile</a></li>
+    <li><a className="dropdown-item" href="#">Settings</a></li>
+    <li><hr className="dropdown-divider" /></li>
+    <li><a className="dropdown-item" href="#">Logout</a></li>
+  </ul>
+</div>
+              {/* Admin Dropdown end */}
             </div>
           </div>
         </nav>
