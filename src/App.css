@@ -1,0 +1,236 @@
+  .network-card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .network-card .card-header {
+            background-color: #343a40; /* Dark background for header */
+            color: white;
+            border-bottom: 1px solid #495057;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .network-card .card-header h5 {
+            margin-bottom: 0;
+            color: #d1d1d1; /* Lighter color for header title */
+            font-weight: 600;
+        }
+        .network-card .card-header .btn-outline-secondary {
+            color: #ccc;
+            border-color: #6c757d;
+            background-color: #495057;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+        }
+        .network-card .card-header .btn-outline-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+            color: white;
+        }
+        .network-card .card-header .dropdown-toggle {
+            background-color: #495057;
+            border-color: #6c757d;
+            color: #ccc;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+        }
+        .network-card .card-header .dropdown-toggle::after {
+            vertical-align: 0.05em; /* Adjust dropdown arrow position */
+        }
+        .network-card .card-header .dropdown-menu {
+            font-size: 0.8rem;
+            background-color: #495057;
+            border-color: #6c757d;
+        }
+        .network-card .card-header .dropdown-item {
+            color: #ccc;
+        }
+        .network-card .card-header .dropdown-item:hover {
+            background-color: #5a6268;
+            color: white;
+        }
+
+        .info-valid {
+            font-size: 0.75rem;
+            color: #ccc;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .card-body {
+            background-color: #ffffff; /* White background for card body */
+            padding: 20px;
+        }
+
+        .card-body h6 {
+            color: #343a40;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Graph Area Styling */
+        .graph-container {
+            position: relative;
+            height: 200px; /* Adjust height to match image */
+            width: 100%;
+            border-left: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+            background-color: #fdfdfd; /* Slightly off-white for graph background */
+        }
+
+        .y-axis-label {
+            position: absolute;
+            left: -35px; /* Position to the left of the graph container */
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.7rem;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .y-axis-value {
+            position: absolute;
+            right: calc(100% + 5px); /* Position to the left of the graph container */
+            font-size: 0.7rem;
+            color: #666;
+            text-align: right;
+            width: 30px;
+        }
+
+        .y-axis-value.val-20 { top: 0px; }
+        .y-axis-value.val-15 { top: 48px; } /* (200px / 4) * 1 */
+        .y-axis-value.val-10 { top: 98px; } /* (200px / 4) * 2 */
+        .y-axis-value.val-05 { top: 148px; } /* (200px / 4) * 3 */
+        .y-axis-value.val-00 { top: 195px; } /* Bottom of the graph */
+
+
+        .x-axis-label {
+            position: absolute;
+            bottom: -20px;
+            font-size: 0.7rem;
+            color: #666;
+            transform: translateX(-50%); /* Center the label under the tick */
+        }
+
+        /* Grid lines */
+        .grid-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            border-top: 1px dotted #e0e0e0;
+        }
+        .grid-line.line-1 { top: 50px; }
+        .grid-line.line-2 { top: 100px; }
+        .grid-line.line-3 { top: 150px; }
+
+        .vertical-grid-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            border-left: 1px dotted #e0e0e0;
+        }
+        .vertical-grid-line.fr-04 { left: calc(100% / 5 * 1); }
+        .vertical-grid-line.fr-08 { left: calc(100% / 5 * 2); }
+        .vertical-grid-line.fr-12 { left: calc(100% / 5 * 3); }
+        .vertical-grid-line.fr-16 { left: calc(100% / 5 * 4); }
+
+
+        /* Graph data areas */
+        .graph-data {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .graph-green-area {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%; /* Roughly up to Fr 08:00 */
+            height: 95%; /* Corresponds to ~1.9 ONUs */
+            background-color: rgba(0, 128, 0, 0.3); /* Darker green */
+            border: 1px solid #717171; /* Vertical line at the drop */
+        }
+        .graph-brown-area {
+            position: absolute;
+            bottom: 0;
+            left: 60%; /* Starts where green ends */
+            width: 40%; /* Continues to the end */
+            height: 48%; /* Corresponds to ~0.9 ONUs */
+            background-color: rgba(139, 69, 19, 0.6); /* Brownish color */
+        }
+
+        /* Legend below graph */
+        .graph-legend {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 5px;
+            font-size: 0.75rem;
+            color: #666;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            margin-bottom: 5px;
+        }
+        .legend-color-box {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+        }
+        .legend-item.online-onus .legend-color-box { background-color: rgba(52, 124, 15, 0.1); border-color: #347C0F; } /* Darker green for legend */
+        .legend-item.power-fail .legend-color-box { background-color: #1a73e8; border-color: #1a73e8; } /* Blue for power fail */
+        .legend-item.maximum .legend-color-box { background-color: #d94f2b; border-color: #d94f2b; } /* Orange/Red for maximum */
+        .legend-item.signal-loss .legend-color-box { background-color: #00bcd4; border-color: #00bcd4; } /* Cyan for signal loss */
+        .legend-item.na .legend-color-box { background-color: #6c757d; border-color: #6c757d; } /* Gray for N/A */
+
+
+        /* OLTs Status */
+        .olts-status .list-group-item {
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            color: #343a40;
+        }
+        .olts-status .badge {
+            font-size: 0.75rem;
+            font-weight: normal;
+            background-color: #6c757d !important;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .olts-status i {
+            color: #6c757d;
+            margin-right: 8px;
+        }
+
+        /* Online ONUs Details */
+        .online-onus-details {
+            margin-top: 0; /* Adjust margin if needed */
+        }
+        .online-onus-details p {
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #343a40;
+        }
+        .online-onus-details i {
+            margin-right: 8px;
+            width: 15px; /* Ensure consistent icon alignment */
+            text-align: center;
+        }
+        .online-onus-details .text-warning { color: #ffc107 !important; }
+        .online-onus-details .text-danger { color: #dc3545 !important; }
+        .online-onus-details .text-info { color: #0dcaf0 !important; }
+        .online-onus-details .text-muted { color: #6c757d !important; }

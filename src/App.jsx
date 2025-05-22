@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 // import React from 'react';
-// import './App.css'
+import './App.css'
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -204,7 +204,7 @@ const SecondRowStatCard = ({
     <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={cardStyle}>
       <div className="card-body p-0"> {/* Remove padding */}
         {/* Blue background for first and second row, full width */}
-        <div style={{ background: "#0d6efd", borderTopLeftRadius: "0.375rem", borderTopRightRadius: "0.375rem" }}>
+        <div style={{ background: bgColor, borderTopLeftRadius: "0.375rem", borderTopRightRadius: "0.375rem" }}>
           <div className="container-fluid px-3 py-2">
             <div className="row align-items-center mb-2">
               <div className="col-6 d-flex justify-content-between">
@@ -266,7 +266,7 @@ const SecondRowStatCard = ({
           <h5 className="card-title mb-0 flex-grow-1">{title}</h5>
           {details && <small className="text-opacity-75">{details}</small>}
         </div>
-        <p className="card-text display-4 fw-bold text-center">{value}</p>
+        {/* <p className="card-text display-4 fw-bold text-center">{value}</p> */}
       </div>
     </div>
   </div>
@@ -1040,7 +1040,7 @@ useEffect(() => {
 
         
         {/* Statistics Cards Row 2 */}  
-<div className="row mt-3">
+<div className="row mt-4">
   <SecondRowStatCard
   iconClass="fa-solid fa-wand-magic-sparkles"
   row1col2="1"
@@ -1057,7 +1057,7 @@ useEffect(() => {
   bgColor="blue"
   textColor="text-dark"
   cardStyle={{ height: "160px" }}
-  iconColor="#198754"
+  iconColor="#fff"
 />
    <SecondRowStatCard
   iconClass="fa-solid fa-wifi"
@@ -1069,25 +1069,23 @@ useEffect(() => {
   // row3col1="D: 0 Resyn:0"
   row3col1="Total Authorzed: 3 "
   row3col2=""
-  bgColor="blue"
+  bgColor="#E83F25"
   textColor="text-dark"
   cardStyle={{ height: "160px" }}
-  iconColor="#198754"
+  iconColor="#fff"
 />
     <SecondRowStatCard
-  iconClass="fa-solid fa-wifi"
-  row1col2="10000"
+  iconClass="fa-solid fa-x"
+  row1col2="2"
   row2col1="EAP TLS User"
-  row2col2={
-    <span className=''>USER</span>
-  }
+  row2col2="Total Offline"
   // row3col1="D: 0 Resyn:0"
-  row3col1="Total Authorzed: 3 "
-  row3col2=""
-  bgColor="blue"
+  row3col1="PwrFail: 0 LOS: 2 "
+  row3col2="N/A: 1"
+  bgColor="black"
   textColor="text-dark"
   cardStyle={{ height: "160px" }}
-  iconColor="#198754"
+  iconColor="#fff"
 />
   {/* <StatCard
     title=""
@@ -1102,129 +1100,121 @@ useEffect(() => {
     }
   /> */}
   <SecondRowStatCard
-  iconClass="fa-solid fa-wifi"
-  row1col2="10000"
+  iconClass="fa-solid fa-exclamation-circle"
+  row1col2="0"
   row2col1="EAP TLS User"
-  row2col2={
-    <span className=''>USER</span>
-  }
+  row2col2="Low Signal"
   // row3col1="D: 0 Resyn:0"
-  row3col1="Total Authorzed: 3 "
-  row3col2=""
-  bgColor="blue"
+  row3col1="Warning: "
+  row3col2="Critical"
+  bgColor="#FFB22C "
   textColor="text-dark"
   cardStyle={{ height: "160px" }}
-  iconColor="#198754"
+  iconColor="#fff"
 />
   
 </div>
 
         {/* Network Status Section */}
-        <div className="card shadow-sm mt-4">
-          <div className="card-header bg-white d-flex justify-content-between align-items-center">
-            <h5 className="mb-0"><i className="fas fa-chart-area me-2"></i> Network status</h5>
-            <div>
-              <button className="btn btn-outline-secondary btn-sm me-2">More graphs</button>
-              <div className="btn-group">
-                <button type="button" className="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  OLTS
-                </button>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                </ul>
+        
+
+
+        {/* Another Network Status Section */}
+ <div className="container position-relative mt-4">
+  <div className="row">
+    {/* Network Status Card */}
+    <div className="col-md-8 mb-4">
+      <div className="card network-card h-100">
+        <div className="card-header bg-black d-flex align-items-center">
+          <h5 className="mb-0"><i className="fas fa-chart-area me-2" /> Network status</h5>
+        </div>
+        <div className="card-body">
+          <h6 className="card-subtitle mb-3 text-muted">Daily network status</h6>
+          <div className="graph-container mb-3">
+            <span className="y-axis-label">ONUs</span>
+            <span className="y-axis-value val-20">2.0</span>
+            <span className="y-axis-value val-15">1.5</span>
+            <span className="y-axis-value val-10">1.0</span>
+            <span className="y-axis-value val-05">0.5</span>
+            <span className="y-axis-value val-00">0.0</span>
+            <div className="grid-line line-1" />
+            <div className="grid-line line-2" />
+            <div className="grid-line line-3" />
+            <div className="vertical-grid-line fr-04" />
+            <div className="vertical-grid-line fr-08" />
+            <div className="vertical-grid-line fr-12" />
+            <div className="vertical-grid-line fr-16" />
+            <div className="graph-data">
+              <div className="graph-green-area" />
+              <div className="graph-brown-area" />
+            </div>
+            <span className="x-axis-label" style={{ left: '0%' }}>Fr 00:00</span>
+            <span className="x-axis-label" style={{ left: '20%' }}>Fr 04:00</span>
+            <span className="x-axis-label" style={{ left: '40%' }}>Fr 08:00</span>
+            <span className="x-axis-label" style={{ left: '60%' }}>Fr 12:00</span>
+            <span className="x-axis-label" style={{ left: '80%' }}>Fr 16:00</span>
+            <span className="x-axis-label" style={{ left: '100%', transform: 'translateX(-100%)' }}>Fr 20:00</span>
+          </div>
+          <div className="graph-legend mb-3">
+            <div className="legend-item online-onus me-4">
+              <span className="legend-color-box" />
+              <span>Online ONUs</span>
+            </div>
+            <div className="legend-item me-4">
+              <span className="legend-color-box bg-white border" />
+              <span>1 Maximum</span>
+            </div>
+            <div className="legend-item me-4">
+              <span className="legend-color-box bg-white border" />
+              <span>0 Signal loss</span>
+            </div>
+            <div className="legend-item me-4">
+              <span className="legend-color-box bg-white border" />
+              <span>1 N/A</span>
+            </div>
+            <div className="online-onus-details">
+            
+            <div className="row">
+              <div className="col-6">
+                 {/* <p className="mb-1"><i className="fas fa-bolt text-warning" /> Online ONUs</p>
+                <p className="mb-1"><i className="fas fa-bolt text-warning" /> Power fail: 0</p> */}
+                {/* <p className="mb-1"><i className="fas fa-exclamation-circle text-danger" /> Maximum: 2</p> */}
               </div>
-              <div className="btn-group ms-2">
-                <button type="button" className="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  All-
-                </button>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                </ul>
-              </div>
+              {/* <div className="col-6">
+                <p className="mb-1"><i className="fas fa-signal text-info" /> Signal loss: 1</p>
+                <p className="mb-1"><i className="fas fa-times-circle text-muted" /> N/A: 1</p>
+              </div> */}
             </div>
           </div>
-          <div className="card-body">
-            <h6 className="card-subtitle mb-3 text-muted">Daily network status</h6>
-            {/* Graph Placeholder */}
-            <div className="bg-light border rounded p-4 mb-3" style={{ height: '250px', position: 'relative' }}>
-              {/* This is a simplified representation of the graph. A real implementation would use a charting library. */}
-              <div style={{ position: 'absolute', top: '10px', left: '10px', fontSize: '0.8em', color: '#666' }}>
-                <p className="mb-0">ONUs</p>
-                <p className="mb-0">2.0</p>
-                <p className="mb-0">1.5</p>
-                <p className="mb-0">1.0</p>
-                <p className="mb-0">0.5</p>
-                <p className="mb-0">0.0</p>
-              </div>
-              <div style={{ position: 'absolute', bottom: '10px', left: '50px', right: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '0.8em', color: '#666' }}>
-                <span>Fr 00:00</span>
-                <span>Fr 04:00</span>
-                <span>Fr 08:00</span>
-                <span>Fr 12:00</span>
-                <span>Fr 16:00</span>
-                <span>Fr 20:00</span>
-              </div>
-              {/* Simple bar to represent the graph data */}
-              <div style={{
-                position: 'absolute',
-                bottom: '50px',
-                left: '60px',
-                width: 'calc(100% - 120px)',
-                height: '150px',
-                backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                borderLeft: '1px solid #ccc',
-                borderBottom: '1px solid #ccc'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  bottom: '0',
-                  left: '0',
-                  width: '30%',
-                  height: '80%',
-                  backgroundColor: 'rgba(0, 123, 255, 0.6)'
-                }}></div>
-                 <div style={{
-                  position: 'absolute',
-                  bottom: '0',
-                  left: '30%',
-                  width: '70%',
-                  height: '40%',
-                  backgroundColor: 'rgba(0, 123, 255, 0.4)'
-                }}></div>
-              </div>
-            </div>
-
-            <div className="row mt-3">
-              <div className="col-md-6">
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item d-flex justify-content-between align-items-center">
-                    <i className="fas fa-chart-pie me-2"></i> smartolt
-                    <span className="badge bg-secondary">2 Days, 08:35 +PE</span>
-                  </li>
-                  <li className="list-group-item d-flex justify-content-between align-items-center">
-                    <i className="fas fa-chart-pie me-2"></i> OLTONE
-                    <span className="badge bg-secondary">N/A</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-md-6">
-                <h6 className="mt-3 mt-md-0">Online ONUs</h6>
-                <div className="row">
-                  <div className="col-6">
-                    <p className="mb-1"><i className="fas fa-bolt me-2 text-warning"></i> Power fail: 0</p>
-                    <p className="mb-1"><i className="fas fa-exclamation-circle me-2 text-danger"></i> Maximum: 2</p>
-                  </div>
-                  <div className="col-6">
-                    <p className="mb-1"><i className="fas fa-signal me-2 text-info"></i> Signal loss: 1</p>
-                    <p className="mb-1"><i className="fas fa-times-circle me-2 text-muted"></i> N/A: 1</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+      </div>
+    </div>
+    {/* OLTS Card */}
+    <div className="col-md-4 mb-4">
+      <div className="card network-card h-100">
+        <div className="card-header bg-black d-flex align-items-center justify-content-between">
+          <h5 className="mb-0"><i className="fas fa-chart-pie me-2" /> OLTS</h5>
+          <span className="badge bg-secondary">All</span>
+        </div>
+        <div className="card-body">
+          <ul className="list-group list-group-flush mb-4">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              <i className="fas fa-chart-pie me-2" /> smartolt
+              <span className="badge bg-secondary">2 days, 08:35, 49ºC</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              <i className="fas fa-chart-pie me-2" /> OLTONE
+              <span className="badge bg-secondary">N/A</span>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   );
