@@ -142,6 +142,121 @@ function App() {
     </div>
   </div>
 );
+// const SecondRowStatCard = ({
+//   iconClass,
+//   row1col2,
+//   row2col1,
+//   row2col2,
+//   row3col1,
+//   row3col2,
+//   bgColor ,
+//   textColor = "text-dark",
+//   cardStyle = {},
+//   iconColor = "#007bff",
+//   rowBg = "#e9ecef"
+// }) => (
+//   <div className="col-md-3 mb-3">
+//     <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={cardStyle}>
+//       <div className="card-body p-3">
+//         <div className="container-fluid">
+//           <div className="row align-items-center mb-2" >
+//             <div className="col-6 d-flex justify-content-between">
+//               {iconClass && (
+//                 <i className={`${iconClass}`} style={{ fontSize: "2.5rem", color: iconColor }}></i>
+//               )}
+//             </div>
+//             <div className="col-6 d-flex justify-content-end align-items-center">
+//   <span className="fw-bold" style={{ fontSize: "3rem" }}>{row1col2}</span>
+// </div>
+//           </div>
+//           <div className="row mb-2">
+//             {row2col1 ? (
+//               <>
+//                 <div className="col-6" style={{ fontSize: "1rem" }}>{row2col1}</div>
+//                 <div className="col-6 text-end" style={{ fontSize: "0.5rem" }}>{row2col2}</div>
+//               </>
+//             ) : (
+//               <div className="col-12 text-end" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
+//             )}
+//           </div>
+//           <div className="row" style={{ background: "#e3f2fd", borderRadius: "0.25rem" }}>
+//             <div className="col-6" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+//             <div className="col-6 text-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// );
+const SecondRowStatCard = ({
+  iconClass,
+  row1col2,
+  row2col1,
+  row2col2,
+  row3col1,
+  row3col2,
+  bgColor,
+  textColor = "text-dark",
+  cardStyle = {},
+  iconColor = "#007bff",
+}) => (
+  <div className="col-md-3 mb-3">
+    <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={cardStyle}>
+      <div className="card-body p-0"> {/* Remove padding */}
+        {/* Blue background for first and second row, full width */}
+        <div style={{ background: "#0d6efd", borderTopLeftRadius: "0.375rem", borderTopRightRadius: "0.375rem" }}>
+          <div className="container-fluid px-3 py-2">
+            <div className="row align-items-center mb-2">
+              <div className="col-6 d-flex justify-content-between">
+                {iconClass && (
+                  <i className={`${iconClass}`} style={{ fontSize: "2.5rem", color: iconColor }}></i>
+                )}
+              </div>
+              <div className="col-6 d-flex justify-content-end align-items-center">
+                <span className="fw-bold text-white" style={{ fontSize: "2.5rem" }}>{row1col2}</span>
+              </div>
+            </div>
+            <div className="row mb-2">
+              {row2col1 ? (
+                <>
+                  <div className="col-6 text-white" style={{ fontSize: "0.7rem" }}>{row2col1}</div>
+                  <div className="col-6 text-end text-white" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
+                </>
+              ) : (
+                <div className="col-12 text-end text-white" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* Third row with normal padding */}
+        {/* <div className="container-fluid">
+          <div className="row" style={{  borderRadius: "0 0 0.375rem 0.375rem" }}>
+            <div className="col-6" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+            <div className="col-6 text-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+          </div>
+        </div> */}
+        {/* <div className="container-fluid mt-2">
+  <div className="row align-items-center" style={{ borderRadius: "0 0 0.375rem 0.375rem" }}>
+    <div className="col-6 d-flex align-items-center" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+    <div className="col-6 d-flex align-items-center justify-content-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+  </div>
+</div> */}
+<div className="container-fluid mt-2">
+  <div className="row align-items-center" style={{ borderRadius: "0 0 0.375rem 0.375rem" }}>
+    {row3col2 ? (
+      <>
+        <div className="col-6 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+        <div className="col-6 d-flex align-items-center justify-content-end mt-2" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+      </>
+    ) : (
+      <div className="col-12 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+    )}
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+);
   const StatCard = ({ title, value, iconClass, bgColor, textColor, details, size = 'col-md-3', cardStyle }) => (
   <div className={`${size} mb-3`}>
     <div className={`card shadow-sm rounded-1 ${bgColor} ${textColor}`} style={cardStyle}>
@@ -926,40 +1041,55 @@ useEffect(() => {
         
         {/* Statistics Cards Row 2 */}  
 <div className="row mt-3">
-  <StatCard
-    title="EAP-TLS USER"
-    value={`${eapTlsUsers} user`}
-    iconClass="fas fa-wifi"
-    bgColor="bg-danger"
-    textColor="text-white"
-    size="col-md-3"
-    cardStyle={{ height: "160px" }} // Full height
-  />
-  <StatCard
-    title="Total offline"
-    value={totalOffline}
-    iconClass="fas fa-times-circle"
-    bgColor="bg-dark"
-    textColor="text-white"
-    size="col-md-3"
-    cardStyle={{ height: "160px" }}
-  />
-  <StatCard
-    title="Low signals"
-    value={lowSignals}
-    iconClass="fas fa-signal"
-    bgColor="bg-warning"
-    textColor="text-dark"
-    size="col-md-3"
-    cardStyle={{ height: "160px" }}
-    details={
-      <div className="d-flex flex-column align-items-end text-dark">
-        <small>Warning: -</small>
-        <small>Critical: -</small>
-      </div>
-    }
-  />
-  <StatCard
+  <SecondRowStatCard
+  iconClass="fa-solid fa-wand-magic-sparkles"
+  row1col2="1"
+  row2col1=""
+  row2col2="Waiting Authorization"
+  // row3col1="D: 0 Resyn:0"
+  row3col1={
+    <>
+      <span>D: 0</span>
+      <span className="ms-2">Resyn: 0</span>
+    </>
+  }
+  row3col2="New: 1"
+  bgColor="blue"
+  textColor="text-dark"
+  cardStyle={{ height: "160px" }}
+  iconColor="#198754"
+/>
+   <SecondRowStatCard
+  iconClass="fa-solid fa-wifi"
+  row1col2="10000"
+  row2col1="EAP TLS User"
+  row2col2={
+    <span className=''>USER</span>
+  }
+  // row3col1="D: 0 Resyn:0"
+  row3col1="Total Authorzed: 3 "
+  row3col2=""
+  bgColor="blue"
+  textColor="text-dark"
+  cardStyle={{ height: "160px" }}
+  iconColor="#198754"
+/>
+    <SecondRowStatCard
+  iconClass="fa-solid fa-wifi"
+  row1col2="10000"
+  row2col1="EAP TLS User"
+  row2col2={
+    <span className=''>USER</span>
+  }
+  // row3col1="D: 0 Resyn:0"
+  row3col1="Total Authorzed: 3 "
+  row3col2=""
+  bgColor="blue"
+  textColor="text-dark"
+  cardStyle={{ height: "160px" }}
+  iconColor="#198754"
+/>
+  {/* <StatCard
     title=""
     value=""
     size="col-md-3"
@@ -970,7 +1100,23 @@ useEffect(() => {
         <p className="text-muted mb-0">Information valid at 20:18</p>
       </div>
     }
-  />
+  /> */}
+  <SecondRowStatCard
+  iconClass="fa-solid fa-wifi"
+  row1col2="10000"
+  row2col1="EAP TLS User"
+  row2col2={
+    <span className=''>USER</span>
+  }
+  // row3col1="D: 0 Resyn:0"
+  row3col1="Total Authorzed: 3 "
+  row3col2=""
+  bgColor="blue"
+  textColor="text-dark"
+  cardStyle={{ height: "160px" }}
+  iconColor="#198754"
+/>
+  
 </div>
 
         {/* Network Status Section */}
