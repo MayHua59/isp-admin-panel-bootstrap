@@ -56,6 +56,9 @@ import './App.css'
 
 
 import React, { useState, useEffect , useRef} from 'react';
+import FirstRowStatCard from './components/FirstRowStatCard';
+import SecondRowStatCard from './components/SecondRowStatCard';
+import NetworkStatusChart from './components/NetworkStatusChart';
 
 // Main App component
 function App() {
@@ -113,36 +116,36 @@ function App() {
   //     </div>
   //   </div>
   // );
-  const FirstRowStatCard = ({
-  iconClass,
-  mainText,
-  leftText,
-  rightText,
-  bgColor = "bg-white",
-  textColor = "text-dark",
-  cardStyle = {},
-  iconColor ,
-}) => (
-  <div className="col-md-3 mb-3">
-    <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={{...cardStyle,borderRadius: "0.375rem", 
-    overflow: "hidden",}}>
-      <div className="card-body p-3 pb-2 ">
-        {/* First row: icon + main text */}
-        <div className="d-flex align-items-center mb-2">
-          {iconClass && (
-            <i className={`${iconClass} me-2`} style={{ fontSize: "1rem", color: iconColor }}></i>
-          )}
-          <span className="fw-bold">{mainText}</span>
-        </div>
-        {/* Second row: left and right text */}
-        <div className="d-flex justify-content-between">
-          <span>{leftText}</span>
-          <span>{rightText}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+//   const FirstRowStatCard = ({
+//   iconClass,
+//   mainText,
+//   leftText,
+//   rightText,
+//   bgColor = "bg-white",
+//   textColor = "text-dark",
+//   cardStyle = {},
+//   iconColor ,
+// }) => (
+//   <div className="col-md-3 mb-3">
+//     <div className={`card shadow-sm rounded-0 ${bgColor} ${textColor}`} style={{...cardStyle,borderRadius: "0.375rem", 
+//     overflow: "hidden",}}>
+//       <div className="card-body p-3 pb-2 ">
+//         {/* First row: icon + main text */}
+//         <div className="d-flex align-items-center mb-2">
+//           {iconClass && (
+//             <i className={`${iconClass} me-2`} style={{ fontSize: "1rem", color: iconColor }}></i>
+//           )}
+//           <span className="fw-bold">{mainText}</span>
+//         </div>
+//         {/* Second row: left and right text */}
+//         <div className="d-flex justify-content-between">
+//           <span>{leftText}</span>
+//           <span>{rightText}</span>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// );
 // const SecondRowStatCard = ({
 //   iconClass,
 //   row1col2,
@@ -189,76 +192,76 @@ function App() {
 //     </div>
 //   </div>
 // );
-const SecondRowStatCard = ({
-  iconClass,
-  row1col2,
-  row2col1,
-  row2col2,
-  row3col1,
-  row3col2,
-  bgColor,
-  textColor = "text-dark",
-  cardStyle = {},
-  iconColor = "#007bff",
-}) => (
-  <div className="col-md-3 mb-3">
-    <div className={`card shadow-sm  ${bgColor} ${textColor}`} style={{ ...cardStyle, border: `1px solid ${bgColor}`,borderRadius: "0.375rem", overflow: "hidden" }}>
-      {/* First row with icon and main text */}
-      <div className="card-body p-0"> {/* Remove padding */}
-        {/* Blue background for first and second row, full width */}
-        <div style={{ background: bgColor }}>
-          <div className="container-fluid px-3 py-2">
-            <div className="row align-items-center mb-2">
-              <div className="col-6 d-flex justify-content-between">
-                {iconClass && (
-                  <i className={`${iconClass}`} style={{ fontSize: "2.5rem", color: iconColor }}></i>
-                )}
-              </div>
-              <div className="col-6 d-flex justify-content-end align-items-center">
-                <span className="fw-bold text-white" style={{ fontSize: "2.5rem" }}>{row1col2}</span>
-              </div>
-            </div>
-            <div className="row mb-2">
-              {row2col1 ? (
-                <>
-                  <div className="col-6 text-white" style={{ fontSize: "0.7rem" }}>{row2col1}</div>
-                  <div className="col-6 text-end text-white" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
-                </>
-              ) : (
-                <div className="col-12 text-end text-white" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
-              )}
-            </div>
-          </div>
-        </div>
-        {/* Third row with normal padding */}
-        {/* <div className="container-fluid">
-          <div className="row" style={{  borderRadius: "0 0 0.375rem 0.375rem" }}>
-            <div className="col-6" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
-            <div className="col-6 text-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
-          </div>
-        </div> */}
-        {/* <div className="container-fluid mt-2">
-  <div className="row align-items-center" style={{ borderRadius: "0 0 0.375rem 0.375rem" }}>
-    <div className="col-6 d-flex align-items-center" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
-    <div className="col-6 d-flex align-items-center justify-content-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
-  </div>
-</div> */}
-<div className="container-fluid mt-2">
-  <div className="row align-items-center" >
-    {row3col2 ? (
-      <>
-        <div className="col-6 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
-        <div className="col-6 d-flex align-items-center justify-content-end mt-2" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
-      </>
-    ) : (
-      <div className="col-12 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
-    )}
-  </div>
-</div>
-      </div>
-    </div>
-  </div>
-);
+// const SecondRowStatCard = ({
+//   iconClass,
+//   row1col2,
+//   row2col1,
+//   row2col2,
+//   row3col1,
+//   row3col2,
+//   bgColor,
+//   textColor = "text-dark",
+//   cardStyle = {},
+//   iconColor = "#007bff",
+// }) => (
+//   <div className="col-md-3 mb-3">
+//     <div className={`card shadow-sm  ${bgColor} ${textColor}`} style={{ ...cardStyle, border: `1px solid ${bgColor}`,borderRadius: "0.375rem", overflow: "hidden" }}>
+//       {/* First row with icon and main text */}
+//       <div className="card-body p-0"> {/* Remove padding */}
+//         {/* Blue background for first and second row, full width */}
+//         <div style={{ background: bgColor }}>
+//           <div className="container-fluid px-3 py-2">
+//             <div className="row align-items-center mb-2">
+//               <div className="col-6 d-flex justify-content-between">
+//                 {iconClass && (
+//                   <i className={`${iconClass}`} style={{ fontSize: "2.5rem", color: iconColor }}></i>
+//                 )}
+//               </div>
+//               <div className="col-6 d-flex justify-content-end align-items-center">
+//                 <span className="fw-bold text-white" style={{ fontSize: "2.5rem" }}>{row1col2}</span>
+//               </div>
+//             </div>
+//             <div className="row mb-2">
+//               {row2col1 ? (
+//                 <>
+//                   <div className="col-6 text-white" style={{ fontSize: "0.7rem" }}>{row2col1}</div>
+//                   <div className="col-6 text-end text-white" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
+//                 </>
+//               ) : (
+//                 <div className="col-12 text-end text-white" style={{ fontSize: "0.7rem" }}>{row2col2}</div>
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//         {/* Third row with normal padding */}
+//         {/* <div className="container-fluid">
+//           <div className="row" style={{  borderRadius: "0 0 0.375rem 0.375rem" }}>
+//             <div className="col-6" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+//             <div className="col-6 text-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+//           </div>
+//         </div> */}
+//         {/* <div className="container-fluid mt-2">
+//   <div className="row align-items-center" style={{ borderRadius: "0 0 0.375rem 0.375rem" }}>
+//     <div className="col-6 d-flex align-items-center" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+//     <div className="col-6 d-flex align-items-center justify-content-end" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+//   </div>
+// </div> */}
+// <div className="container-fluid mt-2">
+//   <div className="row align-items-center" >
+//     {row3col2 ? (
+//       <>
+//         <div className="col-6 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+//         <div className="col-6 d-flex align-items-center justify-content-end mt-2" style={{ fontSize: "0.7rem" }}>{row3col2}</div>
+//       </>
+//     ) : (
+//       <div className="col-12 d-flex align-items-center text-nowrap mt-2" style={{ fontSize: "0.7rem" }}>{row3col1}</div>
+//     )}
+//   </div>
+// </div>
+//       </div>
+//     </div>
+//   </div>
+// );
   const StatCard = ({ title, value, iconClass, bgColor, textColor, details, size = 'col-md-3', cardStyle }) => (
   <div className={`${size} mb-3`}>
     <div className={`card shadow-sm rounded-1 ${bgColor} ${textColor}`} style={cardStyle}>
@@ -1135,71 +1138,8 @@ useEffect(() => {
   <div className="row">
     {/* Network Status Card */}
     <div className="col-md-8 mb-4">
-      <div className="card network-card h-100">
-        <div className="card-header bg-black d-flex align-items-center">
-          <h5 className="mb-0"><i className="fas fa-chart-area me-2" /> Network status</h5>
-        </div>
-        <div className="card-body">
-          <h6 className="card-subtitle mb-3 text-muted">Daily network status</h6>
-          <div className="graph-container mb-3">
-            <span className="y-axis-label">ONUs</span>
-            <span className="y-axis-value val-20">2.0</span>
-            <span className="y-axis-value val-15">1.5</span>
-            <span className="y-axis-value val-10">1.0</span>
-            <span className="y-axis-value val-05">0.5</span>
-            <span className="y-axis-value val-00">0.0</span>
-            <div className="grid-line line-1" />
-            <div className="grid-line line-2" />
-            <div className="grid-line line-3" />
-            <div className="vertical-grid-line fr-04" />
-            <div className="vertical-grid-line fr-08" />
-            <div className="vertical-grid-line fr-12" />
-            <div className="vertical-grid-line fr-16" />
-            <div className="graph-data">
-              <div className="graph-green-area" />
-              <div className="graph-brown-area" />
-            </div>
-            <span className="x-axis-label" style={{ left: '0%' }}>Fr 00:00</span>
-            <span className="x-axis-label" style={{ left: '20%' }}>Fr 04:00</span>
-            <span className="x-axis-label" style={{ left: '40%' }}>Fr 08:00</span>
-            <span className="x-axis-label" style={{ left: '60%' }}>Fr 12:00</span>
-            <span className="x-axis-label" style={{ left: '80%' }}>Fr 16:00</span>
-            <span className="x-axis-label" style={{ left: '100%', transform: 'translateX(-100%)' }}>Fr 20:00</span>
-          </div>
-          <div className="graph-legend mb-3">
-            <div className="legend-item online-onus me-4">
-              <span className="legend-color-box" />
-              <span>Online ONUs</span>
-            </div>
-            <div className="legend-item me-4">
-              <span className="legend-color-box bg-white border" />
-              <span>1 Maximum</span>
-            </div>
-            <div className="legend-item me-4">
-              <span className="legend-color-box bg-white border" />
-              <span>0 Signal loss</span>
-            </div>
-            <div className="legend-item me-4">
-              <span className="legend-color-box bg-white border" />
-              <span>1 N/A</span>
-            </div>
-            <div className="online-onus-details">
-            
-            <div className="row">
-              <div className="col-6">
-                 {/* <p className="mb-1"><i className="fas fa-bolt text-warning" /> Online ONUs</p>
-                <p className="mb-1"><i className="fas fa-bolt text-warning" /> Power fail: 0</p> */}
-                {/* <p className="mb-1"><i className="fas fa-exclamation-circle text-danger" /> Maximum: 2</p> */}
-              </div>
-              {/* <div className="col-6">
-                <p className="mb-1"><i className="fas fa-signal text-info" /> Signal loss: 1</p>
-                <p className="mb-1"><i className="fas fa-times-circle text-muted" /> N/A: 1</p>
-              </div> */}
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
+    
+      <NetworkStatusChart/>
     </div>
     {/* OLTS Card */}
     <div className="col-md-4 mb-4">
